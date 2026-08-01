@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 @Component
 @Profile("dev")
-@ConditionalOnProperty(name="app.sms.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "app.sms.enabled", havingValue = "true")
 public class SmsService implements MessageService {
 
     private final DateTimeFormatter dateTimeFormatter;
@@ -26,6 +26,6 @@ public class SmsService implements MessageService {
     @Override
     public void sendMessage(String message) {
         String currentDate = LocalDateTime.now().format(dateTimeFormatter);
-        System.out.println(prefix+ ": " + message + " " + currentDate);
+        System.out.println(prefix + ": " + message + " " + currentDate);
     }
 }

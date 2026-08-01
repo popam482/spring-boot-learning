@@ -4,7 +4,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ServiceA {
-    public ServiceA(ServiceB serviceB) {
+    /*public ServiceA(ServiceB serviceB) {
         System.out.println("ServiceA created");
     }
+     */
 }

@@ -20,7 +20,7 @@ public class NotificationManager {
 
     }
 
-    public void showIdentity(){
+    public void showIdentity() {
         System.out.println("MessageService instance: " + messageService.hashCode());
     }
 

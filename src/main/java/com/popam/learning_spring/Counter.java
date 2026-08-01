@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 public class Counter {
     private int count = 0;
 
-    public void increment(){
-        count ++;
+    public void increment() {
+        count++;
         System.out.println("Count: " + count + " | instance: " + this);
     }
 }

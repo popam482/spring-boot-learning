@@ -8,20 +8,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LearningSpringApplication implements CommandLineRunner {
 
-	@Autowired
-	private NotificationManager notificationManager;
+    @Autowired
+    private NotificationManager notificationManager;
 
-	@Autowired
-	private Counter counter;
+    @Autowired
+    private Counter counter;
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		SpringApplication.run(LearningSpringApplication.class, args);
-	}
-	public void run(String... args) throws Exception {
-		notificationManager.showIdentity();
-		counter.increment();
-		System.out.println("Sending notification...");
-		notificationManager.notifyUser();
-	}
+        SpringApplication.run(LearningSpringApplication.class, args);
+    }
+
+    public void run(String... args) throws Exception {
+        notificationManager.showIdentity();
+        counter.increment();
+        System.out.println("Sending notification...");
+        notificationManager.notifyUser();
+    }
 }
