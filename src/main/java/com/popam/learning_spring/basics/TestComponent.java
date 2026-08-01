@@ -1,4 +1,4 @@
-package com.popam.learning_spring;
+package com.popam.learning_spring.basics;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;

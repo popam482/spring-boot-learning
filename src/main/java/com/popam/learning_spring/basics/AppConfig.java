@@ -1,4 +1,4 @@
-package com.popam.learning_spring;
+package com.popam.learning_spring.basics;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

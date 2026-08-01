@@ -1,4 +1,4 @@
-package com.popam.learning_spring;
+package com.popam.learning_spring.basics;
 
 public interface MessageService {
 

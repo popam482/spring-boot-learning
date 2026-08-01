@@ -1,7 +1,6 @@
-package com.popam.learning_spring;
+package com.popam.learning_spring.basics;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
