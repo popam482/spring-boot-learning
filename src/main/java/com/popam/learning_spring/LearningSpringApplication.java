@@ -11,11 +11,16 @@ public class LearningSpringApplication implements CommandLineRunner {
 	@Autowired
 	private NotificationManager notificationManager;
 
+	@Autowired
+	private Counter counter;
+
 	public static void main(String[] args) {
 
 		SpringApplication.run(LearningSpringApplication.class, args);
 	}
 	public void run(String... args) throws Exception {
+		notificationManager.showIdentity();
+		counter.increment();
 		System.out.println("Sending notification...");
 		notificationManager.notifyUser();
 	}
