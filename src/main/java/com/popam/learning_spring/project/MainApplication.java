@@ -11,14 +11,17 @@ public class MainApplication implements CommandLineRunner {
     @Autowired
     private PaymentProcessor paymentProcessor;
 
+    @Autowired
+    private PaymentService paymentService;
+
     public static void main(String[] args) {
         SpringApplication.run(MainApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        double amount = 250.5;
-        paymentProcessor.processPayment(amount);
+        double amount = 250.555;
+        paymentService.processPayment(amount);
 
     }
 }
