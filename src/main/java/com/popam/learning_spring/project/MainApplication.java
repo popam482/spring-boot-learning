@@ -9,9 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MainApplication implements CommandLineRunner {
 
     @Autowired
-    private PaymentProcessor paymentProcessor;
-
-    @Autowired
     private PaymentService paymentService;
 
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package com.popam.learning_spring.project;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -17,11 +18,14 @@ public class CashPaymentProcessor implements PaymentProcessor {
         this.df = df;
     }
 
+    @PostConstruct
+    public void init() {
+        System.out.println("Cash payment service: postconstruct - constructor has already been called");
+    }
+
     @Override
     public boolean processPayment(double amount) {
-        //System.out.println("Cash payment successful: " + amount);
-        String amountFormater = df.format(amount);
-        logger.log("Cash payment successful: " + amountFormater);
+        logger.log("Cash payment successful: " + amount);
         return true;
     }
 }

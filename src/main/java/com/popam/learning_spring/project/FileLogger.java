@@ -9,12 +9,13 @@ import java.io.IOException;
 
 @Component
 @Profile("prod")
-public class FileLogger implements Logger{
+public class FileLogger implements Logger {
     @Override
     public void log(String message) {
-        try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter("payment.txt"));
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("payment.txt", true))) {
             bw.write(message);
+            bw.newLine();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

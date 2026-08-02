@@ -1,5 +1,7 @@
 package com.popam.learning_spring.project;
 
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -11,18 +13,19 @@ import java.time.LocalDateTime;
 public class CardPaymentProcessor implements PaymentProcessor {
 
     Logger logger;
-    DecimalFormat df;
 
     public CardPaymentProcessor(Logger logger, DecimalFormat df) {
         this.logger = logger;
-        this.df = df;
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("Card payment service: postconstruct - constructor has already been called");
     }
 
     @Override
     public boolean processPayment(double amount) {
-        //System.out.println("Card payment successful: " + amount);
-        String amountFormater = df.format(amount);
-        logger.log("Card payment successful: " + amountFormater);
+        logger.log("Card payment successful: " + amount);
         return true;
     }
 }
