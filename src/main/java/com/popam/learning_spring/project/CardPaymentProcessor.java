@@ -7,9 +7,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class CardPaymentProcessor implements PaymentProcessor {
 
+    Logger logger;
+
+    public CardPaymentProcessor(Logger logger) {
+        this.logger = logger;
+    }
+
     @Override
     public boolean processPayment(double amount) {
-        System.out.println("Card payment successful: " + amount);
+        //System.out.println("Card payment successful: " + amount);
+        logger.log("Card payment successful: " + amount);
         return true;
     }
 }

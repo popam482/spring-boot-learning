@@ -1,11 +1,13 @@
 package com.popam.learning_spring.project;
 
 import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+@Component
 @Profile("prod")
 public class FileLogger implements Logger{
     @Override
