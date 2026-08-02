@@ -1,11 +1,10 @@
-package com.popam.learning_spring.project;
+package com.popam.learning_spring.project_dependency_injection;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.text.DecimalFormat;
-import java.time.format.DateTimeFormatter;
 
 @Configuration
 public class AppConfig {

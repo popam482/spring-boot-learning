@@ -1,4 +1,4 @@
-package com.popam.learning_spring.basics;
+package com.popam.learning_spring.basics_dependency_injection;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;

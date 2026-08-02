@@ -1,4 +1,4 @@
-package com.popam.learning_spring.project;
+package com.popam.learning_spring.project_dependency_injection;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
