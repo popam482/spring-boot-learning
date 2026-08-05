@@ -54,8 +54,8 @@ public class BookController {
        return book;
     }
 
-    @PutMapping("/books/{id}")
-    public Book updateBook(@PathVariable Integer id, @RequestBody Book updatedBook) {
+    @PatchMapping("/books/{id}")
+    public Book patchBook(@PathVariable Integer id, @RequestBody Book updatedBook) {
         Book bookToUpdate = bookList.stream()
                 .filter(book1 -> book1.getId().equals(id))
                 .findFirst()
@@ -79,9 +79,33 @@ public class BookController {
             bookToUpdate.setPublishedYear(updatedBook.getPublishedYear());
         }
 
-        validateBook(bookToUpdate);
+        return bookToUpdate;
+    }
+
+    @PutMapping("/books/{id}")
+    public Book updateBook(@PathVariable Integer id, @RequestBody Book updatedBook) {
+        Book bookToUpdate = bookList.stream()
+                .filter(book1 -> book1.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new BookNotFoundException(id));
+
+        validateBook(updatedBook);
+
+        bookToUpdate.setTitle(updatedBook.getTitle());
+        bookToUpdate.setAuthor(updatedBook.getAuthor());
+        bookToUpdate.setPublishedYear(updatedBook.getPublishedYear());
 
         return bookToUpdate;
     }
 
+    @DeleteMapping("/books/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBook(@PathVariable Integer id) {
+        Book bookToDelete = bookList.stream()
+                .filter(book1 -> book1.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new BookNotFoundException(id));
+
+        bookList.remove(bookToDelete);
+    }
 }
