@@ -1,9 +1,17 @@
 package com.popam.learning_spring.web;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class Book {
     private Integer id;
+    @NotBlank(message = "The book has no title")
     private String title;
+    @NotBlank(message = "The book has no author")
     private String author;
+    @NotNull(message = "The book has no published year")
+    @Min(value=0, message = "The book has a wrong published year")
     private Integer publishedYear;
 
     public Book() {

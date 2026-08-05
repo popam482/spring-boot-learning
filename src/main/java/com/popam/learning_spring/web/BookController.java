@@ -1,5 +1,6 @@
 package com.popam.learning_spring.web;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,11 +41,11 @@ public class BookController {
     }
 
     @PostMapping("/books")
-    public Book addBook(@RequestBody Book book) {
+    public Book addBook(@Valid @RequestBody Book book) {
         if (book.getId() != null) {
             throw new BookIdAddedByUser();
         }
-       validateBook(book);
+       //validateBook(book);
        int nextId = bookList.stream()
                .mapToInt(Book::getId)
                .max()
@@ -89,7 +90,7 @@ public class BookController {
                 .findFirst()
                 .orElseThrow(() -> new BookNotFoundException(id));
 
-        validateBook(updatedBook);
+        //validateBook(updatedBook);
 
         bookToUpdate.setTitle(updatedBook.getTitle());
         bookToUpdate.setAuthor(updatedBook.getAuthor());
