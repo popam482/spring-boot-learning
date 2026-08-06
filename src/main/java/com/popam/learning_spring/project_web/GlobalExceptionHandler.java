@@ -1,6 +1,5 @@
 package com.popam.learning_spring.project_web;
 
-import com.popam.learning_spring.web.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -10,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class ExceptionHandler {
+public class GlobalExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(TaskNotFound.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleTaskNotFoundException(TaskNotFound e) {
@@ -35,9 +34,9 @@ public class ExceptionHandler {
         return e.getMessage();
     }
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(TaskHasNoPriority.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleTaskHasWrongPublishedYear(TaskHasNoPriority e) {
+    @org.springframework.web.bind.annotation.ExceptionHandler(TaskCompleted.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleTaskCompleted(TaskCompleted e) {
         return e.getMessage();
     }
 

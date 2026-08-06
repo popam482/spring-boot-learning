@@ -24,6 +24,13 @@ public class TaskController {
                 .orElseThrow(() -> new TaskNotFound(id));
     }
 
+    @GetMapping("/tasks/search")
+    public List<Task> getTask(@RequestParam Boolean completed) {
+        return taskList.stream()
+                .filter(t -> t.getCompleted().equals(completed))
+                .toList();
+    }
+
     @PostMapping("/tasks")
     public Task createTask(@Valid @RequestBody Task task) {
         if (task.getId() != null) {
@@ -34,6 +41,9 @@ public class TaskController {
                 .max()
                 .orElse(0);
         task.setId(nextId + 1);
+        if(task.getCompleted() == null) {
+            task.setCompleted(false);
+        }
         taskList.add(task);
         return task;
     }
@@ -98,7 +108,9 @@ public class TaskController {
                 .filter(task1 -> task1.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new TaskNotFound(id));
-
+        if(taskToDelete.getCompleted()==true) {
+            throw new TaskCompleted(taskToDelete.getId());
+        }
         taskList.remove(taskToDelete);
     }
 }
