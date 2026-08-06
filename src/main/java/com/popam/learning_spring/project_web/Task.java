@@ -1,13 +1,22 @@
 package com.popam.learning_spring.project_web;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+@Entity
 public class Task {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private @NotBlank String title;
     private String description;
-    private @NotNull Priority priority;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Priority priority;
+
     private Boolean completed;
 
     public Task() {}
