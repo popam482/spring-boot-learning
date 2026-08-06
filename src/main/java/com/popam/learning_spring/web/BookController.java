@@ -49,7 +49,7 @@ public class BookController {
        int nextId = bookList.stream()
                .mapToInt(Book::getId)
                .max()
-               .orElse(1);
+               .orElse(0);
        book.setId(nextId + 1);
        bookList.add(book);
        return book;
@@ -84,7 +84,7 @@ public class BookController {
     }
 
     @PutMapping("/books/{id}")
-    public Book updateBook(@PathVariable Integer id, @RequestBody Book updatedBook) {
+    public Book updateBook(@PathVariable Integer id, @Valid @RequestBody Book updatedBook) {
         Book bookToUpdate = bookList.stream()
                 .filter(book1 -> book1.getId().equals(id))
                 .findFirst()
