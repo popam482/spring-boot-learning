@@ -9,108 +9,46 @@ import java.util.List;
 
 @RestController
 public class TaskController {
-    List<Task> taskList = new ArrayList<>();
+    private final TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @GetMapping("/tasks")
     public List<Task> getTasks() {
-        return taskList;
+        return taskService.getAllTasks();
     }
 
     @GetMapping("/tasks/{id}")
     public Task getTask(@PathVariable Integer id) {
-        return taskList.stream()
-                .filter(t -> t.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new TaskNotFound(id));
+        return taskService.getTaskById(id);
     }
 
     @GetMapping("/tasks/search")
     public List<Task> getTask(@RequestParam Boolean completed) {
-        return taskList.stream()
-                .filter(t -> t.getCompleted().equals(completed))
-                .toList();
+        return taskService.searchByCompleted(completed);
     }
 
     @PostMapping("/tasks")
     public Task createTask(@Valid @RequestBody Task task) {
-        if (task.getId() != null) {
-            throw new TaskIdAddedByUser();
-        }
-        int nextId = taskList.stream()
-                .mapToInt(Task::getId)
-                .max()
-                .orElse(0);
-        task.setId(nextId + 1);
-        if(task.getCompleted() == null) {
-            task.setCompleted(false);
-        }
-        taskList.add(task);
-        return task;
+        return taskService.createTask(task);
     }
 
     @PatchMapping("/tasks/{id}")
     public Task patchTask(@PathVariable Integer id,
                           @RequestBody Task updatedTask) {
-
-        Task taskToUpdate = taskList.stream()
-                .filter(task -> task.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new TaskNotFound(id));
-
-        if (updatedTask.getId() != null) {
-            throw new TaskIdAddedByUser();
-        }
-
-        if (updatedTask.getTitle() != null) {
-            if (updatedTask.getTitle().isBlank()) {
-                throw new TaskHasNoTitle();
-            }
-            taskToUpdate.setTitle(updatedTask.getTitle());
-        }
-
-        if (updatedTask.getDescription() != null) {
-            if (updatedTask.getDescription().isBlank()) {
-                throw new TaskHasNoDescription();
-            }
-            taskToUpdate.setDescription(updatedTask.getDescription());
-        }
-
-        if (updatedTask.getPriority() != null) {
-            taskToUpdate.setPriority(updatedTask.getPriority());
-        }
-
-        if (updatedTask.getCompleted() != null) {
-            taskToUpdate.setCompleted(updatedTask.getCompleted());
-        }
-
-        return taskToUpdate;
+        return taskService.patchTask(id, updatedTask);
     }
 
     @PutMapping("/tasks/{id}")
     public Task updateTask(@PathVariable Integer id, @Valid @RequestBody Task updatedTask) {
-        Task taskToUpdate = taskList.stream()
-                .filter(task1 -> task1.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new TaskNotFound(id));
-
-        taskToUpdate.setTitle(updatedTask.getTitle());
-        taskToUpdate.setDescription(updatedTask.getDescription());
-        taskToUpdate.setPriority(updatedTask.getPriority());
-        taskToUpdate.setCompleted(updatedTask.getCompleted());
-
-        return taskToUpdate;
+        return taskService.updateTask(id, updatedTask);
     }
 
     @DeleteMapping("/tasks/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTask(@PathVariable Integer id) {
-        Task taskToDelete = taskList.stream()
-                .filter(task1 -> task1.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new TaskNotFound(id));
-        if(taskToDelete.getCompleted()==true) {
-            throw new TaskCompleted(taskToDelete.getId());
-        }
-        taskList.remove(taskToDelete);
+       taskService.deleteTask(id);
     }
 }

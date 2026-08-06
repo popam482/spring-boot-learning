@@ -49,7 +49,7 @@ public class Task {
         this.priority = priority;
     }
 
-    public void setCompleted(boolean completed) {
+    public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
 
