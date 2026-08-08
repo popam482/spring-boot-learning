@@ -37,7 +37,11 @@ function App() {
                 setNewDescription('');
                 setNewPriority('');
                 setOpen(false);
-            });
+            })
+        .catch(error => {
+            console.log(error);
+
+        });
     }
 
     return (
@@ -61,7 +65,7 @@ function App() {
                     </li>
                 ))}
             </ul>
-            <button onClick={() => setOpen(true)}>Add task</button>
+            <button className="addButton" onClick={() => setOpen(true)}>Add task</button>
             {isOpen && (
                 <div className="popupContent">
                     <h2>Add a new task</h2>
