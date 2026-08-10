@@ -115,6 +115,28 @@ function App() {
             })
     }
 
+    function toggleCompleted(task){
+        fetch(`http://localhost:8080/tasks/${task.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                completed: !task.completed
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(errorData => { throw errorData;});
+                }
+                return response.json();
+            })
+            .then(data => {
+                taskSet(tasks.map(t => t.id === task.id ? data : t));
+            })
+            .catch(error => console.log(error));
+    }
+
     return (
         <div className="container">
             <h1 className="main-title">Task manager</h1>
@@ -133,8 +155,12 @@ function App() {
                                     {task.completed ? 'Task finished' : 'In progress'}</span>
                             </span>
                         </div>
-                        <button className="deleteButton" onClick={() => deleteTask(task.id)}>Delete </button>
+                        <button className="deleteButton" onClick={() => deleteTask(task.id)}>Delete</button>
                         <button className="editButton" onClick={() => openEditTask(task)}>Edit</button>
+                        <label className="switch">
+                            <input type="checkbox" checked={task.completed} onChange={() => toggleCompleted(task)} />
+                            <span className="slider round"></span>
+                        </label>
                     </li>
                 ))}
             </ul>
