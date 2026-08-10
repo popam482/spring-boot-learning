@@ -59,6 +59,27 @@ body {
 .status-finished { color: #2e7d32; font-weight: bold; }
 .status-progress { color: #e65100; font-weight: bold; }
 
+/* delete button for tasks*/
+.deleteButton {
+    background: #2d5a27;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 8px;
+    font-size: 1-px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+    position: relative;
+    top: -70px;
+    right: -550px;
+}
+
+.deleteButton:hover {
+    background: #23491f;
+    transform: translateY(-1px);
+}
+
 /* Add task button */
 
 .addButton {

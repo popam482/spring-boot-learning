@@ -11,6 +11,8 @@ function App() {
 
     const [isOpen, setOpen] = useState(false);
 
+    const[errors, setErrors] = useState({})
+
     useEffect(() =>{
         fetch('http://localhost:8080/tasks')
             .then(response => response.json())
@@ -30,18 +32,43 @@ function App() {
                 priority: newPriority
             })
         })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(errorData => {
+                        throw errorData;
+                    });
+                }
+                return response.json();
+            })
             .then(data => {
                 taskSet([...tasks, data]);
                 setNewTitle('');
                 setNewDescription('');
-                setNewPriority('');
+                setNewPriority('LOW');
                 setOpen(false);
             })
         .catch(error => {
             console.log(error);
-
+            setErrors(error);
         });
+    }
+
+    function deleteTask(id){
+        fetch(`http://localhost:8080/tasks/${id}`, {
+            method: 'DELETE',
+        })
+            .then(response =>{
+                if(!response.ok){
+                    return response.json().then(errorData => {
+                        throw errorData;
+                    })
+                }
+                taskSet(tasks.filter(task => task.id !== id));
+            })
+        .catch(error => {
+            console.log(error);
+            setErrors(error);
+        })
     }
 
     return (
@@ -62,6 +89,7 @@ function App() {
                                     {task.completed ? 'Task finished' : 'In progress'}</span>
                             </span>
                         </div>
+                        <button className="deleteButton" onClick={() => deleteTask(task.id)}>Delete </button>
                     </li>
                 ))}
             </ul>
@@ -74,13 +102,17 @@ function App() {
                         value={newTitle}
                         onChange={(e) => setNewTitle(e.target.value)}
                         placeholder="Task title"
+
                     />
+                    {errors.title && <span className="error-text">{errors.title}</span>}
                     <input
                         type="text"
                         value={newDescription}
                         onChange={(e) => setNewDescription(e.target.value)}
                         placeholder="Task description"
+
                     />
+                    {errors.description && <span className="error-description">{errors.description}</span>}
                     <select value={newPriority} onChange={(e) => setNewPriority(e.target.value)}>
                         <option value="LOW">LOW</option>
                         <option value="MEDIUM">MEDIUM</option>

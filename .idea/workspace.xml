@@ -98,7 +98,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "npm.dev.executor": "Debug",
+    "npm.dev.executor": "Run",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
@@ -210,10 +210,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainTask" />
         <item itemvalue="Spring Boot.MainTask" />
         <item itemvalue="Spring Boot.MainLibrary" />
         <item itemvalue="Node.js.App.jsx" />
-        <item itemvalue="Application.MainTask" />
         <item itemvalue="Spring Boot.MainApplication" />
       </list>
     </recent_temporary>
@@ -239,7 +239,8 @@
       <workItem from="1785942415186" duration="8187000" />
       <workItem from="1786009387093" duration="21080000" />
       <workItem from="1786196592897" duration="2069000" />
-      <workItem from="1786209641628" duration="2991000" />
+      <workItem from="1786209641628" duration="3481000" />
+      <workItem from="1786357032182" duration="3488000" />
     </task>
     <servers />
   </component>
