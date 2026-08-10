@@ -8,6 +8,7 @@ function App() {
     const [newDescription, setNewDescription] = useState('')
     const [newPriority, setNewPriority] = useState('LOW')
     const [newCompletion, setNewCompletion] = useState(false)
+    const [editingTask, setEditingTask] = useState(null)
 
     const [isOpen, setOpen] = useState(false);
 
@@ -71,6 +72,49 @@ function App() {
         })
     }
 
+    function openEditTask(task){
+        setNewTitle(task.title);
+        setNewDescription(task.description);
+        setNewPriority(task.priority);
+        setEditingTask(task.id);
+        setNewCompletion(task.completed);
+        setOpen(true);
+    }
+
+    function updateTask(id){
+        fetch(`http://localhost:8080/tasks/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: newTitle,
+                description: newDescription,
+                priority: newPriority
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    throw errorData;
+                })
+            }
+            return response.json();
+        })
+            .then(data => {
+                taskSet(tasks.map(task => task.id === id ? data : task));
+                setNewTitle('');
+                setNewDescription('');
+                setNewPriority('LOW');
+                setEditingTask(null);
+                setOpen(false);
+            })
+            .catch(error => {
+                console.log(error);
+                setErrors(error);
+            })
+    }
+
     return (
         <div className="container">
             <h1 className="main-title">Task manager</h1>
@@ -90,6 +134,7 @@ function App() {
                             </span>
                         </div>
                         <button className="deleteButton" onClick={() => deleteTask(task.id)}>Delete </button>
+                        <button className="editButton" onClick={() => openEditTask(task)}>Edit</button>
                     </li>
                 ))}
             </ul>
@@ -118,8 +163,10 @@ function App() {
                         <option value="MEDIUM">MEDIUM</option>
                         <option value="HIGH">HIGH</option>
                     </select>
-                    <button onClick={addTask}>Add</button>
-                    <button onClick={() => setOpen(false)}>Close</button>
+                    <button onClick={() => editingTask ? updateTask(editingTask) : addTask()}>
+                        {editingTask ? 'Save' : 'Add'}
+                    </button>
+                    <button onClick={() => { setOpen(false); setEditingTask(null); }}>Close</button>
                 </div>
             )}
         </div>
