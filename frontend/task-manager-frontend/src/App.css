@@ -109,6 +109,25 @@ body {
     transform: translateY(-1px);
 }
 
+.filterButton{
+    background: #2d5a27;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 8px;
+    font-size: 1-px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.filterButton:hover{
+    background: #23491f;
+    transform: translateY(-1px);
+}
+
 /* completion switch*/
 .switch {
     position: relative;
@@ -147,7 +166,7 @@ body {
 
 
 input:checked + .slider {
-    background-color: #4CAF50;
+    background-color: #2d5a27;
 }
 
 

@@ -12,13 +12,13 @@ function App() {
 
     const [isOpen, setOpen] = useState(false);
 
+    const [filter, setFilter] = useState('all')
+
     const[errors, setErrors] = useState({})
 
-    useEffect(() =>{
-        fetch('http://localhost:8080/tasks')
-            .then(response => response.json())
-            .then(data => taskSet(data))
-    }, [])
+    useEffect(() => {
+        fetchTasks(filter);
+    }, [filter]);
 
 
     function addTask(){
@@ -137,9 +137,27 @@ function App() {
             .catch(error => console.log(error));
     }
 
+    function fetchTasks(filter){
+        let url = `http://localhost:8080/tasks`;
+        if(filter === 'completed'){
+            url = 'http://localhost:8080/tasks/search?completed=true';
+        }
+        else if(filter === 'pending'){
+            url = 'http://localhost:8080/tasks/search?completed=false';
+        }
+        fetch(url)
+        .then(response => response.json())
+        .then(data => taskSet(data));    
+    }
+
     return (
         <div className="container">
             <h1 className="main-title">Task manager</h1>
+            <div className="filterButtons">
+                <button className="filterButton" onClick={() => setFilter('all')}>All</button>
+                <button className="filterButton" onClick={() => setFilter('pending')}>Pending</button>
+                <button className="filterButton" onClick={() => setFilter('completed')}>Completed</button>
+            </div>
             <ul className="task-list">
                 {tasks.map(task => (
                     <li key={task.id} className="task-card">
