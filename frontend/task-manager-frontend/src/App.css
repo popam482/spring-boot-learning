@@ -88,6 +88,15 @@ body {
     transform: translateY(-1px);
 }
 
+.error-banner {
+    background: #fdecea;
+    color: #b71c1c;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
 /* edit button */
 .editButton {
     background: #2d5a27;

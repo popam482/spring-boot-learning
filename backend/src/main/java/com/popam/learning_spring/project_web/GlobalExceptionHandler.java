@@ -2,6 +2,7 @@ package com.popam.learning_spring.project_web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -34,12 +35,13 @@ public class GlobalExceptionHandler {
         return e.getMessage();
     }
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(TaskCompleted.class)
+    @ExceptionHandler(TaskCompleted.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public String handleTaskCompleted(TaskCompleted e) {
-        return e.getMessage();
+    public Map<String, String> handleTaskCompleted(TaskCompleted e) {
+        Map<String, String> error = new HashMap<>();
+        error.put("message", e.getMessage());
+        return error;
     }
-
     @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> handleValidationErrors(MethodArgumentNotValidException ex) {

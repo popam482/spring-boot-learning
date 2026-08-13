@@ -16,6 +16,8 @@ function App() {
 
     const[errors, setErrors] = useState({})
 
+    const [deleteError, setDeleteError] = useState('');
+
     useEffect(() => {
         fetchTasks(filter);
     }, [filter]);
@@ -65,10 +67,11 @@ function App() {
                     })
                 }
                 taskSet(tasks.filter(task => task.id !== id));
+                setDeleteError('');
             })
         .catch(error => {
             console.log(error);
-            setErrors(error);
+            setDeleteError(error.message);
         })
     }
 
@@ -158,6 +161,7 @@ function App() {
                 <button className="filterButton" onClick={() => setFilter('pending')}>Pending</button>
                 <button className="filterButton" onClick={() => setFilter('completed')}>Completed</button>
             </div>
+            {deleteError && <div className="error-banner">{deleteError}</div>}
             <ul className="task-list">
                 {tasks.map(task => (
                     <li key={task.id} className="task-card">

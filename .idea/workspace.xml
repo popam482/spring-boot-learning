@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b3c86226-8cf8-42e1-b447-4476f05d2b40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/GlobalExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/task-manager-frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/task-manager-frontend/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/task-manager-frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/task-manager-frontend/src/App.jsx" afterDir="false" />
     </list>
@@ -242,7 +243,7 @@
       <workItem from="1786209641628" duration="3481000" />
       <workItem from="1786357032182" duration="11082000" />
       <workItem from="1786616404204" duration="4285000" />
-      <workItem from="1786622093861" duration="709000" />
+      <workItem from="1786622093861" duration="1815000" />
     </task>
     <servers />
   </component>
