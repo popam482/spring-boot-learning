@@ -95,6 +95,13 @@ body {
     border-radius: 8px;
     margin-bottom: 15px;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.closeBanner{
+    margin-left: auto;
+    font-size: 25px;
 }
 
 /* edit button */

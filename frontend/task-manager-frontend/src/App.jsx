@@ -161,7 +161,10 @@ function App() {
                 <button className="filterButton" onClick={() => setFilter('pending')}>Pending</button>
                 <button className="filterButton" onClick={() => setFilter('completed')}>Completed</button>
             </div>
-            {deleteError && <div className="error-banner">{deleteError}</div>}
+            {deleteError && <div className="error-banner">
+                <span>{deleteError}</span>
+                <buttton className="closeBanner" onClick={() => setDeleteError('')}>×</buttton>
+            </div>}
             <ul className="task-list">
                 {tasks.map(task => (
                     <li key={task.id} className="task-card">
