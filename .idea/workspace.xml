@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3c86226-8cf8-42e1-b447-4476f05d2b40" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/UserResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +20,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
         <option value="Exception" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -246,7 +247,7 @@
       <workItem from="1786616404204" duration="4285000" />
       <workItem from="1786622093861" duration="6228000" />
       <workItem from="1786628687528" duration="8000" />
-      <workItem from="1786793721992" duration="440000" />
+      <workItem from="1786793721992" duration="3498000" />
     </task>
     <servers />
   </component>

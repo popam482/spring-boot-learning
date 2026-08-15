@@ -31,6 +31,10 @@ public class User {
         this.username = username;
     }
 
+    public User() {
+
+    }
+
     public Integer getUser_id() {
         return user_id;
     }
