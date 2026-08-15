@@ -7,6 +7,10 @@ public class TaskResponseDTO {
     private Priority priority;
     private Boolean completed;
 
+    //user data
+    private Integer user_id;
+    private String username;
+
     public TaskResponseDTO() {
     }
 

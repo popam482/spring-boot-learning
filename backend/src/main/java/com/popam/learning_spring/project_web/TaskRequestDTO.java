@@ -13,13 +13,17 @@ public class TaskRequestDTO {
     @NotNull
     private Boolean completed;
 
+    @NotNull
+    private Priority priority;
+
     public TaskRequestDTO() {
     }
 
-    public TaskRequestDTO(String title, Boolean completed, String description) {
+    public TaskRequestDTO(String title, Boolean completed, String description, Priority priority) {
         this.title = title;
         this.completed = completed;
         this.description = description;
+        this.priority = priority;
     }
 
     public String getTitle() {
@@ -34,6 +38,10 @@ public class TaskRequestDTO {
         return completed;
     }
 
+    public Priority getPriority() {
+        return priority;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -44,5 +52,9 @@ public class TaskRequestDTO {
 
     public void setCompleted(Boolean completed) {
         this.completed = completed;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }

@@ -51,4 +51,12 @@ public class GlobalExceptionHandler {
         );
         return errors;
     }
+
+    @ExceptionHandler(UserNotFound.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, String> handleUserNotFound(UserNotFound e) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", e.getMessage());
+        return errors;
+    }
 }
