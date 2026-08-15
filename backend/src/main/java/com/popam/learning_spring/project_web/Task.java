@@ -19,6 +19,10 @@ public class Task {
 
     private Boolean completed;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Task() {}
 
     public Task(Integer id, String title, String description, Priority priority, boolean completed) {

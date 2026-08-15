@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b3c86226-8cf8-42e1-b447-4476f05d2b40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/task-manager-frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/task-manager-frontend/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/Task.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="59" />
+    <option name="cachedIndexableFilesCount" value="58" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -244,7 +244,9 @@
       <workItem from="1786209641628" duration="3481000" />
       <workItem from="1786357032182" duration="11082000" />
       <workItem from="1786616404204" duration="4285000" />
-      <workItem from="1786622093861" duration="5560000" />
+      <workItem from="1786622093861" duration="6228000" />
+      <workItem from="1786628687528" duration="8000" />
+      <workItem from="1786793721992" duration="440000" />
     </task>
     <servers />
   </component>
