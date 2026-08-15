@@ -16,14 +16,18 @@ public class TaskRequestDTO {
     @NotNull
     private Priority priority;
 
+    @NotNull(message = "User id cannot be null")
+    private Integer userId;
+
     public TaskRequestDTO() {
     }
 
-    public TaskRequestDTO(String title, Boolean completed, String description, Priority priority) {
+    public TaskRequestDTO(String title, Boolean completed, String description, Priority priority, Integer userId) {
         this.title = title;
         this.completed = completed;
         this.description = description;
         this.priority = priority;
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -42,6 +46,10 @@ public class TaskRequestDTO {
         return priority;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -56,5 +64,9 @@ public class TaskRequestDTO {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

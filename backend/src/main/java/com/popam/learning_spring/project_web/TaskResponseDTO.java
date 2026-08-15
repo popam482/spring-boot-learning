@@ -42,6 +42,14 @@ public class TaskResponseDTO {
         return completed;
     }
 
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -60,5 +68,13 @@ public class TaskResponseDTO {
 
     public void setCompleted(Boolean completed) {
         this.completed = completed;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

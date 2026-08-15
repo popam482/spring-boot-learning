@@ -8,75 +8,124 @@ import java.util.Optional;
 @Service
 public class TaskService {
     private final TaskRepository taskRepository;
+    private final UserRepository userRepository;
 
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, UserRepository userRepository) {
         this.taskRepository = taskRepository;
+        this.userRepository = userRepository;
     }
 
-    public List<Task> getAllTasks() {
-        return taskRepository.findAll();
+    public List<TaskResponseDTO> getAllTasks() {
+        return taskRepository.findAll()
+                .stream()
+                .map(this::toResponseDTO)
+                .toList();
     }
 
-    public Task getTaskById(Integer id) {
-        Optional<Task> taskById = taskRepository.findById(id);
-        if (taskById.isEmpty()) {
-            throw new TaskNotFound(id);
-        }
-        return taskById.get();
+    public TaskResponseDTO getTaskById(Integer id) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new TaskNotFound(id));
+        return toResponseDTO(task);
     }
 
-    public Task createTask(Task task) {
-        if (task.getId() != null) {
-            throw new TaskIdAddedByUser();
-        }
+    public TaskResponseDTO createTask(TaskRequestDTO requestDTO) {
+        Task task = toEntity(requestDTO);
 
         if (task.getCompleted() == null) {
             task.setCompleted(false);
         }
 
-        return taskRepository.save(task);
+        Task savedTask = taskRepository.save(task);
+        return toResponseDTO(savedTask);
     }
 
-    public Task updateTask(Integer id, Task updatedTask) {
-        Task existingTask = getTaskById(id);
+    public TaskResponseDTO updateTask(Integer id, TaskRequestDTO requestDTO) {
+        Task existingTask = taskRepository.findById(id)
+                .orElseThrow(() -> new TaskNotFound(id));
 
-        existingTask.setTitle(updatedTask.getTitle());
-        existingTask.setDescription(updatedTask.getDescription());
-        existingTask.setCompleted(updatedTask.getCompleted());
-        existingTask.setPriority(updatedTask.getPriority());
+        User user = userRepository.findById(requestDTO.getUserId())
+                .orElseThrow(() -> new UserNotFound(requestDTO.getUserId()));
 
-        return taskRepository.save(existingTask);
+        existingTask.setTitle(requestDTO.getTitle());
+        existingTask.setDescription(requestDTO.getDescription());
+        existingTask.setCompleted(requestDTO.getCompleted() != null ? requestDTO.getCompleted() : false);
+        existingTask.setPriority(requestDTO.getPriority());
+        existingTask.setUser(user);
+
+        Task savedTask = taskRepository.save(existingTask);
+        return toResponseDTO(savedTask);
     }
 
-    public Task patchTask(Integer id, Task updatedTask) {
-        Task existingTask = getTaskById(id);
+    public TaskResponseDTO patchTask(Integer id, TaskRequestDTO requestDTO) {
+        Task existingTask = taskRepository.findById(id)
+                .orElseThrow(() -> new TaskNotFound(id));
 
-        if (updatedTask.getTitle() != null) {
-            existingTask.setTitle(updatedTask.getTitle());
+        if (requestDTO.getTitle() != null) {
+            existingTask.setTitle(requestDTO.getTitle());
         }
-        if (updatedTask.getDescription() != null) {
-            existingTask.setDescription(updatedTask.getDescription());
+        if (requestDTO.getDescription() != null) {
+            existingTask.setDescription(requestDTO.getDescription());
         }
-        if (updatedTask.getCompleted() != null) {
-            existingTask.setCompleted(updatedTask.getCompleted());
+        if (requestDTO.getCompleted() != null) {
+            existingTask.setCompleted(requestDTO.getCompleted());
         }
-        if (updatedTask.getPriority() != null) {
-            existingTask.setPriority(updatedTask.getPriority());
+        if (requestDTO.getPriority() != null) {
+            existingTask.setPriority(requestDTO.getPriority());
+        }
+        if (requestDTO.getUserId() != null) {
+            User user = userRepository.findById(requestDTO.getUserId())
+                    .orElseThrow(() -> new UserNotFound(requestDTO.getUserId()));
+            existingTask.setUser(user);
         }
 
-        return taskRepository.save(existingTask);
+        Task savedTask = taskRepository.save(existingTask);
+        return toResponseDTO(savedTask);
     }
 
     public void deleteTask(Integer id) {
-        Task taskToDelete = getTaskById(id);
-        if(taskToDelete.getCompleted() == true) {
+        Task taskToDelete = taskRepository.findById(id)
+                .orElseThrow(() -> new TaskNotFound(id));
+
+        if (Boolean.TRUE.equals(taskToDelete.getCompleted())) {
             throw new TaskCompleted(id);
         }
+
         taskRepository.deleteById(id);
     }
 
-    public List<Task> searchByCompleted(Boolean completed) {
-        return taskRepository.findTasksByCompleted(completed);
+    public List<TaskResponseDTO> searchByCompleted(Boolean completed) {
+        return taskRepository.findTasksByCompleted(completed).stream()
+                .map(this::toResponseDTO)
+                .toList();
     }
 
+    private TaskResponseDTO toResponseDTO(Task task) {
+        TaskResponseDTO dto = new TaskResponseDTO();
+        dto.setId(task.getId());
+        dto.setTitle(task.getTitle());
+        dto.setDescription(task.getDescription());
+        dto.setCompleted(task.getCompleted());
+        dto.setPriority(task.getPriority());
+
+        if (task.getUser() != null) {
+            dto.setUser_id(task.getUser().getUser_id());
+            dto.setUsername(task.getUser().getUsername());
+        }
+
+        return dto;
+    }
+
+    private Task toEntity(TaskRequestDTO dto) {
+        User user = userRepository.findById(dto.getUserId())
+                .orElseThrow(() -> new UserNotFound(dto.getUserId()));
+
+        Task task = new Task();
+        task.setTitle(dto.getTitle());
+        task.setDescription(dto.getDescription());
+        task.setCompleted(dto.getCompleted());
+        task.setPriority(dto.getPriority());
+        task.setUser(user);
+
+        return task;
+    }
 }

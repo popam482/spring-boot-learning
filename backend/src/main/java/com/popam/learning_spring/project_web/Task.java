@@ -23,7 +23,8 @@ public class Task {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Task() {}
+    public Task() {
+    }
 
     public Task(Integer id, String title, String description, Priority priority, boolean completed) {
         this.id = id;
@@ -57,6 +58,10 @@ public class Task {
         this.completed = completed;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -75,5 +80,9 @@ public class Task {
 
     public Boolean getCompleted() {
         return completed;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
