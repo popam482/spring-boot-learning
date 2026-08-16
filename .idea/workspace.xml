@@ -6,13 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b3c86226-8cf8-42e1-b447-4476f05d2b40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/UserNotFound.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/UserNotFound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,16 +16,16 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="58" />
+    <option name="cachedIndexableFilesCount" value="67" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="SimpleSourceFile" />
         <option value="Exception" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -253,7 +249,8 @@
       <workItem from="1786616404204" duration="4285000" />
       <workItem from="1786622093861" duration="6228000" />
       <workItem from="1786628687528" duration="8000" />
-      <workItem from="1786793721992" duration="8915000" />
+      <workItem from="1786793721992" duration="9022000" />
+      <workItem from="1786879400570" duration="1470000" />
     </task>
     <servers />
   </component>
