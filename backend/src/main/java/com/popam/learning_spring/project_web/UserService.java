@@ -41,4 +41,13 @@ public class UserService {
         User savedUser = userRepository.save(user);
         return toResponseDTO(savedUser);
     }
+
+    public UserResponseDTO login(LoginRequestDTO loginRequestDTO) {
+        User user = userRepository.findByUsername(loginRequestDTO.getUsername())
+                .orElseThrow(() -> new InvalidCredentials());
+        if(!passwordEncoder.matches(loginRequestDTO.getPassword(), user.getPassword())) {
+            throw new InvalidCredentials();
+        }
+        return toResponseDTO(user);
+    }
 }

@@ -59,4 +59,12 @@ public class GlobalExceptionHandler {
         errors.put("message", e.getMessage());
         return errors;
     }
+
+    @ExceptionHandler(InvalidCredentials.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Map<String, String> handleInvalidCredentials(InvalidCredentials e) {
+        Map<String, String> error = new HashMap<>();
+        error.put("message", e.getMessage());
+        return error;
+    }
 }
