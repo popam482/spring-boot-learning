@@ -9,10 +9,12 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
     private UserResponseDTO toResponseDTO(User user) {
@@ -44,7 +46,7 @@ public class UserService {
 
     public UserResponseDTO login(LoginRequestDTO loginRequestDTO) {
         User user = userRepository.findByUsername(loginRequestDTO.getUsername())
-                .orElseThrow(() -> new InvalidCredentials());
+                .orElseThrow(InvalidCredentials::new);
         if(!passwordEncoder.matches(loginRequestDTO.getPassword(), user.getPassword())) {
             throw new InvalidCredentials();
         }
