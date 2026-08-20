@@ -31,9 +31,7 @@ function App() {
     function addTask(){
         fetch('http://localhost:8080/tasks', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: authHeaders,
             body: JSON.stringify({
                 title: newTitle,
                 description: newDescription,
@@ -92,9 +90,7 @@ function App() {
     function updateTask(id){
         fetch(`http://localhost:8080/tasks/${id}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: authHeaders,
             body: JSON.stringify({
                 title: newTitle,
                 description: newDescription,
@@ -126,9 +122,7 @@ function App() {
     function toggleCompleted(task){
         fetch(`http://localhost:8080/tasks/${task.id}`, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: authHeaders,
             body: JSON.stringify({
                 completed: !task.completed
             })
@@ -153,7 +147,9 @@ function App() {
         else if(filter === 'pending'){
             url = 'http://localhost:8080/tasks/search?completed=false';
         }
-        fetch(url)
+        fetch(url, {
+            headers: {'Authorization': `Bearer ${token}`}
+        })
         .then(response => response.json())
         .then(data => taskSet(data));    
     }
@@ -188,6 +184,7 @@ function App() {
     return (
         <div className="container">
             <h1 className="main-title">Task manager</h1>
+            <button className="deleteButton" onClick={handleLogout}>Logout</button>
             <div className="filterButtons">
                 <button className="filterButton" onClick={() => setFilter('all')}>All</button>
                 <button className="filterButton" onClick={() => setFilter('pending')}>Pending</button>

@@ -7,10 +7,10 @@ function Register({onRegisterSuccess, switchToLogin}) {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
 
-    function handleLogin(e) {
+    function handleRegister(e) {
         e.preventDefault();
         setError('');
-        fetch('http://localhost:8080/register', {
+        fetch('http://localhost:8080/users', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({username, password, email})
@@ -22,8 +22,7 @@ function Register({onRegisterSuccess, switchToLogin}) {
                 return res.json();
             })
             .then(data => {
-                localStorage.setItem('token', data.token);
-                onRegisterSuccess(data.token);
+                switchToLogin();
             })
             .catch(err => setError(err.message));
     }
