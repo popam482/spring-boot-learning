@@ -50,7 +50,7 @@ function Register({onRegisterSuccess, switchToLogin}) {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
-                <button type="submit">Login</button>
+                <button type="submit">Sign up</button>
             </form>
             <p>Already registered? Sign in <button onClick ={switchToLogin}>Sign in</button></p>
         </div>

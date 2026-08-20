@@ -1,22 +1,27 @@
 import {useState, useEffect} from 'react'
 import './App.css';
+import Login from './Login.jsx'
+import Register from './Register.jsx'
 
 
 function App() {
-    const [tasks, taskSet] = useState([])
-    const [newTitle, setNewTitle] = useState('')
-    const [newDescription, setNewDescription] = useState('')
-    const [newPriority, setNewPriority] = useState('LOW')
-    const [newCompletion, setNewCompletion] = useState(false)
-    const [editingTask, setEditingTask] = useState(null)
+    const [tasks, taskSet] = useState([]);
+    const [newTitle, setNewTitle] = useState('');
+    const [newDescription, setNewDescription] = useState('');
+    const [newPriority, setNewPriority] = useState('LOW');
+    const [newCompletion, setNewCompletion] = useState(false);
+    const [editingTask, setEditingTask] = useState(null);
 
     const [isOpen, setOpen] = useState(false);
 
-    const [filter, setFilter] = useState('all')
+    const [filter, setFilter] = useState('all');
 
-    const[errors, setErrors] = useState({})
+    const[errors, setErrors] = useState({});
 
     const [deleteError, setDeleteError] = useState('');
+
+    const [token, setToken] = useState(localStorage.getItem('token'));
+    const [view, setView] = useState('login');
 
     useEffect(() => {
         fetchTasks(filter);
@@ -152,6 +157,33 @@ function App() {
         .then(response => response.json())
         .then(data => taskSet(data));    
     }
+
+    function handleLogout(){
+        localStorage.removeItem('token');
+        setToken(null);
+    }
+
+    if(!token){
+        if(view === 'register'){
+            return(
+                <Register
+                    onRegisterSuccess={(newToken) => setToken(newToken)}
+                    switchToLogin={() => setView('login')}
+                />
+            );
+        }
+        return (
+            <Login
+                onLoginSuccess={(newToken) => setToken(newToken)}
+                switchToRegister={() => setView('register')}
+            />
+        );
+    }
+
+    const authHeaders = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    };
 
     return (
         <div className="container">
