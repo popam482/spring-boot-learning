@@ -44,12 +44,14 @@ public class UserService {
         return toResponseDTO(savedUser);
     }
 
-    public UserResponseDTO login(LoginRequestDTO loginRequestDTO) {
+    public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
         User user = userRepository.findByUsername(loginRequestDTO.getUsername())
                 .orElseThrow(InvalidCredentials::new);
         if(!passwordEncoder.matches(loginRequestDTO.getPassword(), user.getPassword())) {
             throw new InvalidCredentials();
         }
-        return toResponseDTO(user);
+        String token = jwtUtil.generateToken(user.getUsername());
+        UserResponseDTO userResponseDTO = toResponseDTO(user);
+        return new LoginResponseDTO(token, userResponseDTO);
     }
 }

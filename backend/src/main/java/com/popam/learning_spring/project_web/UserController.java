@@ -1,6 +1,7 @@
 package com.popam.learning_spring.project_web;
 
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public UserResponseDTO login(@Valid @RequestBody LoginRequestDTO loginRequest) {
+    public LoginResponseDTO login(@Valid @RequestBody LoginRequestDTO loginRequest) {
         return userService.login(loginRequest);
     }
 
