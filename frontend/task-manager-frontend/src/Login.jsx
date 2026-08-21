@@ -9,6 +9,7 @@ function Login({onLoginSuccess, switchToRegister}) {
 
     function handleLogin(e) {
         e.preventDefault();
+        setError('');
         fetch('http://localhost:8080/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -34,6 +35,7 @@ function Login({onLoginSuccess, switchToRegister}) {
         <div className="container">
             <div className="auth-card">
                     <h1 className="auth-title">Sign in</h1>
+                    {error && <div className="error-banner">{error}</div>}
                     <form onSubmit={handleLogin}>
                         <input
                             type="text"

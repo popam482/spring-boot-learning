@@ -31,6 +31,7 @@ function Register({onRegisterSuccess, switchToLogin}) {
         <div className="container">
             <div className="auth-card">
                 <h1 className="auth-title">Sign up</h1>
+                {error && <div className="error-banner">{error}</div>}
                 <form onSubmit={handleRegister}>
                     <input
                         type="text"
