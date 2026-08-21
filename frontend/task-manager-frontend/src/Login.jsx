@@ -21,8 +21,11 @@ function Login({onLoginSuccess, switchToRegister}) {
                 return res.json();
             })
             .then(data => {
+                console.log('Login response backend:', data);
+
                 localStorage.setItem('token', data.token);
-                onLoginSuccess(data.token);
+                localStorage.setItem('userId', data.user.id);
+                onLoginSuccess(data.token, data.user.id);
             })
             .catch(err => setError(err.message));
     }

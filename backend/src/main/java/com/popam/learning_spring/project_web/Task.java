@@ -13,7 +13,6 @@ public class Task {
     private @NotBlank String title;
     private String description;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     private Priority priority;
 

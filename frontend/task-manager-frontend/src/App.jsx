@@ -23,10 +23,18 @@ function App() {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [view, setView] = useState('login');
 
-    useEffect(() => {
-        fetchTasks(filter);
-    }, [filter]);
+    const [userId, setUserId] = useState(localStorage.getItem('userId'));
 
+    useEffect(() => {
+        if(token) {
+            fetchTasks(filter);
+        }
+    }, [filter, token]);
+
+    const authHeaders = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    };
 
     function addTask(){
         fetch('http://localhost:8080/tasks', {
@@ -35,7 +43,8 @@ function App() {
             body: JSON.stringify({
                 title: newTitle,
                 description: newDescription,
-                priority: newPriority
+                priority: newPriority,
+                userId: parseInt(userId)
             })
         })
             .then(response => {
@@ -62,6 +71,7 @@ function App() {
     function deleteTask(id){
         fetch(`http://localhost:8080/tasks/${id}`, {
             method: 'DELETE',
+            headers: authHeaders,
         })
             .then(response =>{
                 if(!response.ok){
@@ -94,7 +104,8 @@ function App() {
             body: JSON.stringify({
                 title: newTitle,
                 description: newDescription,
-                priority: newPriority
+                priority: newPriority,
+                userId: parseInt(userId),
             })
         })
         .then(response => {
@@ -147,16 +158,22 @@ function App() {
         else if(filter === 'pending'){
             url = 'http://localhost:8080/tasks/search?completed=false';
         }
-        fetch(url, {
-            headers: {'Authorization': `Bearer ${token}`}
-        })
-        .then(response => response.json())
-        .then(data => taskSet(data));    
+        fetch(url, { headers: authHeaders })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to load tasks');
+                }
+                return response.json();
+            })
+            .then(data => taskSet(data))
+            .catch(error => console.log(error));
     }
 
     function handleLogout(){
         localStorage.removeItem('token');
+        localStorage.removeItem('userId');
         setToken(null);
+        setUserId(null);
     }
 
     if(!token){
@@ -170,19 +187,18 @@ function App() {
         }
         return (
             <Login
-                onLoginSuccess={(newToken) => setToken(newToken)}
+                onLoginSuccess={(newToken, newUserId) => {
+                    setToken(newToken)
+                    setUserId(newUserId);
+                }}
                 switchToRegister={() => setView('register')}
             />
         );
     }
 
-    const authHeaders = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-    };
-
     return (
         <div className="container">
+            <title>Task Manager</title>
             <h1 className="main-title">Task manager</h1>
             <button className="deleteButton" onClick={handleLogout}>Logout</button>
             <div className="filterButtons">
@@ -192,7 +208,7 @@ function App() {
             </div>
             {deleteError && <div className="error-banner">
                 <span>{deleteError}</span>
-                <buttton className="closeBanner" onClick={() => setDeleteError('')}>×</buttton>
+                <button className="closeBanner" onClick={() => setDeleteError('')}>×</button>
             </div>}
             <ul className="task-list">
                 {tasks.map(task => (

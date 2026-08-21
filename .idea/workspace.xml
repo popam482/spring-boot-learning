@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b3c86226-8cf8-42e1-b447-4476f05d2b40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/CorsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/task-manager-frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/task-manager-frontend/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/task-manager-frontend/src/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/task-manager-frontend/src/Login.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +253,7 @@
       <workItem from="1786879400570" duration="2922000" />
       <workItem from="1787075933829" duration="15000" />
       <workItem from="1787231680703" duration="11433000" />
-      <workItem from="1787302861256" duration="5002000" />
+      <workItem from="1787302861256" duration="8327000" />
     </task>
     <servers />
   </component>
