@@ -29,23 +29,25 @@ function Login({onLoginSuccess, switchToRegister}) {
 
     return (
         <div className="container">
-            <h1>Authentication</h1>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                />
-                    <button type="submit">Login</button>
-            </form>
-            <p>New there? Join us <button onClick ={switchToRegister}>Sign up</button></p>
+            <div className="auth-card">
+                    <h1 className="auth-title">Sign in</h1>
+                    <form onSubmit={handleLogin}>
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={e => setUsername(e.target.value)}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                        />
+                            <button className="authenticationButton" type="submit">Login</button>
+                    </form>
+                    <p>New there? Join us <button className="authenticationButton" onClick ={switchToRegister}>Sign up</button></p>
+            </div>
         </div>
 );
 }

@@ -339,3 +339,79 @@ input:checked + .slider:before {
 .popupButtons .cancelButton:hover {
     background: #dddddd;
 }
+
+/* Authentification buttons */
+
+.authenticationButton{
+    background: #2d5a27;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 8px;
+    font-size: 1-px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+    position: relative;
+}
+
+.authenticationButton:hover {
+    background: #23491f;
+    transform: translateY(-1px);
+}
+
+.auth-card{
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 70px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.auth-card:hover{
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.auth-card form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    gap: 16px;
+}
+
+.auth-card input {
+    width: 100%;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.auth-card .authenticationButton {
+    padding: 12px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.auth-card form .authenticationButton {
+    width: 100%;
+}
+
+.auth-card p .authenticationButton {
+    width: 60%;
+}
+
+.auth-title {
+    text-align: center;
+    color: #1a4314;
+    margin-bottom: 25px;
+}

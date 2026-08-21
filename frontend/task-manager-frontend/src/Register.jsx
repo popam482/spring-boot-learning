@@ -29,29 +29,31 @@ function Register({onRegisterSuccess, switchToLogin}) {
 
     return (
         <div className="container">
-            <h1>Registration</h1>
-            <form onSubmit={handleRegister}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                />
-                <button type="submit">Sign up</button>
-            </form>
-            <p>Already registered? Sign in <button onClick ={switchToLogin}>Sign in</button></p>
+            <div className="auth-card">
+                <h1 className="auth-title">Sign up</h1>
+                <form onSubmit={handleRegister}>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={e => setUsername(e.target.value)}
+                    />
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <button className="authenticationButton" type="submit">Sign up</button>
+                </form>
+                <p>Already registered? Sign in <button className="authenticationButton" onClick ={switchToLogin}>Sign in</button></p>
+            </div>
         </div>
     );
 }
