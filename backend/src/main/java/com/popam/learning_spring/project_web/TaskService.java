@@ -1,9 +1,9 @@
 package com.popam.learning_spring.project_web;
 
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -15,50 +15,55 @@ public class TaskService {
         this.userRepository = userRepository;
     }
 
-    public List<TaskResponseDTO> getAllTasks() {
-        return taskRepository.findAll()
+    public List<TaskResponseDTO> getAllTasks(String username) {
+        return taskRepository.findByUserUsername(username)
                 .stream()
                 .map(this::toResponseDTO)
                 .toList();
     }
 
-    public TaskResponseDTO getTaskById(Integer id) {
+    public TaskResponseDTO getTaskById(Integer id, String username) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFound(id));
+        verifyOwnership(task, username);
         return toResponseDTO(task);
     }
 
-    public TaskResponseDTO createTask(TaskRequestDTO requestDTO) {
-        Task task = toEntity(requestDTO);
+    public TaskResponseDTO createTask(TaskRequestDTO requestDTO, String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (task.getCompleted() == null) {
-            task.setCompleted(false);
-        }
+        Task task = new Task();
+        task.setTitle(requestDTO.getTitle());
+        task.setDescription(requestDTO.getDescription());
+        task.setCompleted(requestDTO.getCompleted() != null ? requestDTO.getCompleted() : false);
+        task.setPriority(requestDTO.getPriority());
+        task.setUser(user);
 
         Task savedTask = taskRepository.save(task);
         return toResponseDTO(savedTask);
     }
 
-    public TaskResponseDTO updateTask(Integer id, TaskRequestDTO requestDTO) {
+    public TaskResponseDTO updateTask(Integer id, TaskRequestDTO requestDTO, String username) {
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFound(id));
 
-        User user = userRepository.findById(requestDTO.getUserId())
-                .orElseThrow(() -> new UserNotFound(requestDTO.getUserId()));
+        verifyOwnership(existingTask, username);
 
         existingTask.setTitle(requestDTO.getTitle());
         existingTask.setDescription(requestDTO.getDescription());
         existingTask.setCompleted(requestDTO.getCompleted() != null ? requestDTO.getCompleted() : false);
         existingTask.setPriority(requestDTO.getPriority());
-        existingTask.setUser(user);
 
         Task savedTask = taskRepository.save(existingTask);
         return toResponseDTO(savedTask);
     }
 
-    public TaskResponseDTO patchTask(Integer id, TaskRequestDTO requestDTO) {
+    public TaskResponseDTO patchTask(Integer id, TaskRequestDTO requestDTO, String username) {
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFound(id));
+
+        verifyOwnership(existingTask, username);
 
         if (requestDTO.getTitle() != null) {
             existingTask.setTitle(requestDTO.getTitle());
@@ -72,19 +77,16 @@ public class TaskService {
         if (requestDTO.getPriority() != null) {
             existingTask.setPriority(requestDTO.getPriority());
         }
-        if (requestDTO.getUserId() != null) {
-            User user = userRepository.findById(requestDTO.getUserId())
-                    .orElseThrow(() -> new UserNotFound(requestDTO.getUserId()));
-            existingTask.setUser(user);
-        }
 
         Task savedTask = taskRepository.save(existingTask);
         return toResponseDTO(savedTask);
     }
 
-    public void deleteTask(Integer id) {
+    public void deleteTask(Integer id, String username) {
         Task taskToDelete = taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFound(id));
+
+        verifyOwnership(taskToDelete, username);
 
         if (Boolean.TRUE.equals(taskToDelete.getCompleted())) {
             throw new TaskCompleted(id);
@@ -93,10 +95,16 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
-    public List<TaskResponseDTO> searchByCompleted(Boolean completed) {
-        return taskRepository.findTasksByCompleted(completed).stream()
+    public List<TaskResponseDTO> searchByCompleted(Boolean completed, String username) {
+        return taskRepository.findTasksByCompletedAndUserUsername(completed, username).stream()
                 .map(this::toResponseDTO)
                 .toList();
+    }
+
+    private void verifyOwnership(Task task, String username) {
+        if (task.getUser() == null || !task.getUser().getUsername().equals(username)) {
+            throw new AccessDeniedException("You do not have permission to modify this task");
+        }
     }
 
     private TaskResponseDTO toResponseDTO(Task task) {
@@ -113,19 +121,5 @@ public class TaskService {
         }
 
         return dto;
-    }
-
-    private Task toEntity(TaskRequestDTO dto) {
-        User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new UserNotFound(dto.getUserId()));
-
-        Task task = new Task();
-        task.setTitle(dto.getTitle());
-        task.setDescription(dto.getDescription());
-        task.setCompleted(dto.getCompleted());
-        task.setPriority(dto.getPriority());
-        task.setUser(user);
-
-        return task;
     }
 }

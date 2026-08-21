@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b3c86226-8cf8-42e1-b447-4476f05d2b40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/popam/learning_spring/project_web/TaskService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +136,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MainTask">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="MainTask" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.MainTask" />
       <module name="learning-spring" />
@@ -247,7 +250,7 @@
       <workItem from="1786879400570" duration="2922000" />
       <workItem from="1787075933829" duration="15000" />
       <workItem from="1787231680703" duration="11433000" />
-      <workItem from="1787302861256" duration="8981000" />
+      <workItem from="1787302861256" duration="11938000" />
     </task>
     <servers />
   </component>
