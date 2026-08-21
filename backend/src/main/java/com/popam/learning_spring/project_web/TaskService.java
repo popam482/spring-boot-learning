@@ -31,7 +31,7 @@ public class TaskService {
 
     public TaskResponseDTO createTask(TaskRequestDTO requestDTO, String username) {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFound("User not found"));
 
         Task task = new Task();
         task.setTitle(requestDTO.getTitle());

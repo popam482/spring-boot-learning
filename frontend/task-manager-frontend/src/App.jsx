@@ -25,6 +25,8 @@ function App() {
 
     const [userId, setUserId] = useState(localStorage.getItem('userId'));
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         if(token) {
             fetchTasks(filter);
@@ -166,7 +168,8 @@ function App() {
                 return response.json();
             })
             .then(data => taskSet(data))
-            .catch(error => console.log(error));
+            .catch(error => console.log(error))
+            .finally(()=>setLoading(false));
     }
 
     function handleLogout(){
@@ -199,74 +202,87 @@ function App() {
     return (
         <div className="container">
             <title>Task Manager</title>
-            <h1 className="main-title">Task manager</h1>
-            <button className="deleteButton" onClick={handleLogout}>Logout</button>
+            <div className="header-bar">
+                <h1 className="main-title">Task manager</h1>
+                <button className="logoutButton" onClick={handleLogout}>Logout</button>
+            </div>
             <div className="filterButtons">
-                <button className="filterButton" onClick={() => setFilter('all')}>All</button>
-                <button className="filterButton" onClick={() => setFilter('pending')}>Pending</button>
-                <button className="filterButton" onClick={() => setFilter('completed')}>Completed</button>
+                <button className={`filterButton ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>All</button>
+                <button className={`filterButton ${filter === 'pending' ? 'active' : ''}`} onClick={() => setFilter('pending')}>Pending</button>
+                <button className={`filterButton ${filter === 'completed' ? 'active' : ''}`} onClick={() => setFilter('completed')}>Completed</button>
             </div>
             {deleteError && <div className="error-banner">
                 <span>{deleteError}</span>
                 <button className="closeBanner" onClick={() => setDeleteError('')}>×</button>
             </div>}
-            <ul className="task-list">
-                {tasks.map(task => (
-                    <li key={task.id} className="task-card">
-                        <div className="task-title">{task.title}</div>
-                        <div className="task-description">{task.description}</div>
+            {loading ? (
+                <div className="empty-message">Loading tasks...</div>
+            ) : tasks.length === 0 ? (
+                <div className="empty-message">
+                    <p>No tasks available!</p>
+                    <p>Click <strong>"Add task"</strong> below to create your first task.</p>
+                </div>
+            ) : (
+                <ul className="task-list">
+                    {tasks.map(task => (
+                        <li key={task.id} className="task-card">
+                            <div className="task-header">
+                                <div className="task-title">{task.title}</div>
+                                <div className="task-actions">
+                                    <button className="editButton" onClick={() => openEditTask(task)}>Edit</button>
+                                    <button className="deleteButton" onClick={() => deleteTask(task.id)}>Delete</button>
+                                </div>
+                            </div>
 
-                        <div className="task-details">
-                            <span>
-                                Priority: <span className={`priority-${task.priority}`}>{task.priority}</span>
-                            </span>
-                            <span>
-                                Status: <span className={task.completed ? 'status-finished' : 'status-progress'}>
-                                    {task.completed ? 'Task finished' : 'In progress'}</span>
-                            </span>
-                        </div>
-                        <button className="deleteButton" onClick={() => deleteTask(task.id)}>Delete</button>
-                        <button className="editButton" onClick={() => openEditTask(task)}>Edit</button>
-                        <label className="switch">
-                            <input type="checkbox" checked={task.completed} onChange={() => toggleCompleted(task)} />
-                            <span className="slider round"></span>
-                        </label>
-                    </li>
-                ))}
-            </ul>
+                            <div className="task-description">{task.description}</div>
+
+                            <div className="task-details">
+                                <span>Priority: <span className={`priority-${task.priority}`}>{task.priority}</span></span>
+                                <span>Status: <span className={task.completed ? 'status-finished' : 'status-progress'}>{task.completed ? 'Task finished' : 'In progress'}</span></span>
+                                <label className="switch">
+                                    <input type="checkbox" checked={task.completed} onChange={() => toggleCompleted(task)} />
+                                    <span className="slider round"></span>
+                                </label>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            )}
             <button className="addButton" onClick={() => setOpen(true)}>Add task</button>
             {isOpen && (
-                <div className="popupContent">
-                    <h2>Add a new task</h2>
-                    <input
-                        type="text"
-                        value={newTitle}
-                        onChange={(e) => setNewTitle(e.target.value)}
-                        placeholder="Task title"
+                <div className ="modal-overlay">
+                    <div className="popupContent">
+                        <h2>{editingTask ? 'Edit task' : 'Add a new task'}</h2>
+                        <input
+                            type="text"
+                            value={newTitle}
+                            onChange={(e) => setNewTitle(e.target.value)}
+                            placeholder="Task title"
 
-                    />
-                    {errors.title && <span className="error-text">{errors.title}</span>}
-                    <input
-                        type="text"
-                        value={newDescription}
-                        onChange={(e) => setNewDescription(e.target.value)}
-                        placeholder="Task description"
+                        />
+                        {errors.title && <span className="error-text">{errors.title}</span>}
+                        <input
+                            type="text"
+                            value={newDescription}
+                            onChange={(e) => setNewDescription(e.target.value)}
+                            placeholder="Task description"
 
-                    />
-                    {errors.description && <span className="error-description">{errors.description}</span>}
-                    <select value={newPriority} onChange={(e) => setNewPriority(e.target.value)}>
-                        <option value="LOW">LOW</option>
-                        <option value="MEDIUM">MEDIUM</option>
-                        <option value="HIGH">HIGH</option>
-                    </select>
-                    <button onClick={() => editingTask ? updateTask(editingTask) : addTask()}>
-                        {editingTask ? 'Save' : 'Add'}
-                    </button>
-                    <button onClick={() => { setOpen(false); setEditingTask(null); }}>Close</button>
+                        />
+                        {errors.description && <span className="error-description">{errors.description}</span>}
+                        <select value={newPriority} onChange={(e) => setNewPriority(e.target.value)}>
+                            <option value="LOW">LOW</option>
+                            <option value="MEDIUM">MEDIUM</option>
+                            <option value="HIGH">HIGH</option>
+                        </select>
+                        <button onClick={() => editingTask ? updateTask(editingTask) : addTask()}>
+                            {editingTask ? 'Save' : 'Add'}
+                        </button>
+                        <button onClick={() => { setOpen(false); setEditingTask(null); }}>Close</button>
+                    </div>
                 </div>
             )}
         </div>
-    )
+    );
 }
 
 export default App
