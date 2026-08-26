@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -150,5 +151,85 @@ public class TaskServiceTest {
     void getAllTasks_returnsEmptyList(){
         List<TaskResponseDTO> result = taskService.getAllTasks("testUser");
         assertEquals(0, result.size());
+    }
+
+    @Test
+    void createTask_createsTask() {
+        // Arrange
+        User user = new User();
+        user.setUsername("testUser");
+
+        TaskRequestDTO request = new TaskRequestDTO();
+        request.setTitle("Test task");
+        request.setDescription("Test description");
+        request.setCompleted(false);
+        request.setPriority(Priority.HIGH);
+
+        Task savedTask = new Task();
+        savedTask.setId(1);
+        savedTask.setTitle("Test task");
+        savedTask.setDescription("Test description");
+        savedTask.setCompleted(false);
+        savedTask.setPriority(Priority.HIGH);
+        savedTask.setUser(user);
+
+        when(userRepository.findByUsername("testUser"))
+                .thenReturn(Optional.of(user));
+
+        when(taskRepository.save(any(Task.class)))
+                .thenReturn(savedTask);
+
+        // Act
+        TaskResponseDTO result = taskService.createTask(request, "testUser");
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(1, result.getId());
+        assertEquals("Test task", result.getTitle());
+        assertEquals("Test description", result.getDescription());
+        assertEquals(false, result.getCompleted());
+        assertEquals(Priority.HIGH, result.getPriority());
+        assertEquals("testUser", result.getUsername());
+
+        verify(userRepository).findByUsername("testUser");
+        verify(taskRepository).save(any(Task.class));
+    }
+
+    @Test
+    void createTask_throwsUserNotFound() {
+        when(userRepository.findByUsername("testUser"))
+        .thenReturn(Optional.empty());
+
+        assertThrows(
+                UserNotFound.class,
+                () -> taskService.createTask(new TaskRequestDTO(), "testUser")
+        );
+    }
+
+    @Test
+    void createTask_defaultsCompletedToFalse() {
+        // Arrange
+        User user = new User();
+        user.setUsername("testUser");
+
+        when(userRepository.findByUsername("testUser"))
+                .thenReturn(Optional.of(user));
+
+        TaskRequestDTO request = new TaskRequestDTO();
+        request.setCompleted(null);
+
+        Task savedTask = new Task();
+        savedTask.setId(1);
+        savedTask.setCompleted(false);
+        savedTask.setUser(user);
+
+        when(taskRepository.save(any(Task.class)))
+                .thenReturn(savedTask);
+
+        // Act
+        TaskResponseDTO result = taskService.createTask(request, "testUser");
+
+        // Assert
+        assertFalse(result.getCompleted());
     }
 }
