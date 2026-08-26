@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.access.AccessDeniedException;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -112,5 +113,42 @@ public class TaskServiceTest {
         );
 
         verify(taskRepository).findById(1);
+    }
+
+    @Test
+    void getAllTasks_returnsTasksForUser() {
+        // Arrange
+        User user = new User();
+        user.setUsername("testUser");
+
+        Task task1 = new Task();
+        task1.setId(1);
+        task1.setTitle("Test task1");
+        task1.setUser(user);
+
+        Task task2 = new Task();
+        task2.setId(2);
+        task2.setTitle("Test task2");
+        task2.setUser(user);
+
+        Task task3 = new Task();
+        task3.setId(3);
+        task3.setTitle("Test task3");
+        task3.setUser(user);
+
+        when(taskRepository.findByUserUsername("testUser"))
+                .thenReturn(List.of(task1, task2, task3));
+
+        // Act
+        List<TaskResponseDTO> result = taskService.getAllTasks("testUser");
+
+        // Assert
+        assertEquals(3, result.size());
+    }
+
+    @Test
+    void getAllTasks_returnsEmptyList(){
+        List<TaskResponseDTO> result = taskService.getAllTasks("testUser");
+        assertEquals(0, result.size());
     }
 }

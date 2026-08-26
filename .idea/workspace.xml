@@ -70,6 +70,7 @@
   "keyToString": {
     "Application.MainTask.executor": "Run",
     "JUnit.TaskServiceTest.createTask_returnsTask.executor": "Run",
+    "JUnit.TaskServiceTest.getAllTasks_returnsTasksForUser.executor": "Run",
     "JUnit.TaskServiceTest.getTaskById_returnTask_whenTaskExistsAndBelongsToUser.executor": "Run",
     "JUnit.TaskServiceTest.getTaskById_returnsTask.executor": "Run",
     "JUnit.TaskServiceTest.getTaskById_throwsAccessDenied_whenTaskBelongsToAnotherUser.executor": "Run",
@@ -127,7 +128,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TaskServiceTest.getTaskById_throwsTaskNotFound">
+  <component name="RunManager" selected="JUnit.TaskServiceTest.getAllTasks_returnsEmptyList">
     <configuration name="TaskServiceTest.createTask_returnsTask" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learning-spring" />
       <extension name="coverage">
@@ -144,7 +145,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TaskServiceTest.getTaskById_returnTask_whenTaskExistsAndBelongsToUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TaskServiceTest.getAllTasks_returnsEmptyList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learning-spring" />
       <extension name="coverage">
         <pattern>
@@ -154,7 +155,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
       <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
-      <option name="METHOD_NAME" value="getTaskById_returnTask_whenTaskExistsAndBelongsToUser" />
+      <option name="METHOD_NAME" value="getAllTasks_returnsEmptyList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskServiceTest.getAllTasks_returnsTasksForUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="learning-spring" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.popam.learning_spring.project_web.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
+      <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
+      <option name="METHOD_NAME" value="getAllTasks_returnsTasksForUser" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -171,22 +188,6 @@
       <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
       <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
       <option name="METHOD_NAME" value="getTaskById_returnsTask" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TaskServiceTest.getTaskById_throwsAccessDenied_whenTaskBelongsToAnotherUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="learning-spring" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.popam.learning_spring.project_web.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
-      <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
-      <option name="METHOD_NAME" value="getTaskById_throwsAccessDenied_whenTaskBelongsToAnotherUser" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -220,19 +221,19 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.TaskServiceTest.createTask_returnsTask" />
-      <item itemvalue="JUnit.TaskServiceTest.getTaskById_returnTask_whenTaskExistsAndBelongsToUser" />
+      <item itemvalue="JUnit.TaskServiceTest.getAllTasks_returnsEmptyList" />
+      <item itemvalue="JUnit.TaskServiceTest.getAllTasks_returnsTasksForUser" />
       <item itemvalue="JUnit.TaskServiceTest.getTaskById_returnsTask" />
-      <item itemvalue="JUnit.TaskServiceTest.getTaskById_throwsAccessDenied_whenTaskBelongsToAnotherUser" />
       <item itemvalue="JUnit.TaskServiceTest.getTaskById_throwsTaskNotFound" />
       <item itemvalue="npm.dev" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TaskServiceTest.getAllTasks_returnsEmptyList" />
+        <item itemvalue="JUnit.TaskServiceTest.getAllTasks_returnsTasksForUser" />
         <item itemvalue="JUnit.TaskServiceTest.getTaskById_throwsTaskNotFound" />
         <item itemvalue="JUnit.TaskServiceTest.getTaskById_returnsTask" />
         <item itemvalue="JUnit.TaskServiceTest.createTask_returnsTask" />
-        <item itemvalue="JUnit.TaskServiceTest.getTaskById_returnTask_whenTaskExistsAndBelongsToUser" />
-        <item itemvalue="JUnit.TaskServiceTest.getTaskById_throwsAccessDenied_whenTaskBelongsToAnotherUser" />
       </list>
     </recent_temporary>
   </component>
@@ -269,7 +270,7 @@
       <workItem from="1787302861256" duration="11938000" />
       <workItem from="1787317782383" duration="3288000" />
       <workItem from="1787387851614" duration="152000" />
-      <workItem from="1787757309800" duration="3739000" />
+      <workItem from="1787757309800" duration="4659000" />
     </task>
     <servers />
   </component>
