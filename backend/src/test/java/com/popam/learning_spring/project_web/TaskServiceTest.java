@@ -5,10 +5,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.access.AccessDeniedException;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -43,5 +45,28 @@ public class TaskServiceTest {
         assertEquals("Test task", result.getTitle());
         assertEquals(1, result.getId());
 
+    }
+
+    @Test
+    void getTaskById_throwsAccessDenied_whenTaskBelongsToAnotherUser() {
+        // Arrange
+        Task task = new Task();
+        task.setId(1);
+        task.setTitle("Test task");
+        task.setDescription("Test task description");
+
+        User user = new User();
+        user.setUsername("anotherTestUser");
+
+        task.setUser(user);
+
+        when(taskRepository.findById(1))
+                .thenReturn(Optional.of(task));
+
+        // Act + Assert
+        assertThrows(
+                AccessDeniedException.class,
+                () -> taskService.getTaskById(1, "testUser")
+        );
     }
 }
