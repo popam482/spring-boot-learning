@@ -427,4 +427,93 @@ public class TaskServiceTest {
         verify(taskRepository).findById(1);
         verify(taskRepository, never()).save(any(Task.class));
     }
+
+    @Test
+    void deleteTask_deletesTask() {
+        // Arrange
+        User user = new User();
+        user.setUsername("testUser");
+
+        Task task = new Task();
+        task.setId(1);
+        task.setTitle("Test task");
+        task.setCompleted(false);
+        task.setUser(user);
+
+        when(taskRepository.findById(1))
+                .thenReturn(Optional.of(task));
+
+        // Act
+        taskService.deleteTask(1, "testUser");
+
+        // Assert
+        verify(taskRepository).findById(1);
+        verify(taskRepository).deleteById(1);
+    }
+
+    @Test
+    void deleteTask_throwsTaskNotFound() {
+        // Arrange
+        when(taskRepository.findById(1))
+                .thenReturn(Optional.empty());
+
+        // Act + Assert
+        assertThrows(
+                TaskNotFound.class,
+                () -> taskService.deleteTask(1, "testUser")
+        );
+
+        verify(taskRepository).findById(1);
+        verify(taskRepository, never()).deleteById(1);
+    }
+
+    @Test
+    void deleteTask_throwsAccessDenied() {
+        // Arrange
+        User user = new User();
+        user.setUsername("anotherTestUser");
+
+        Task task = new Task();
+        task.setId(1);
+        task.setTitle("Test task");
+        task.setCompleted(false);
+        task.setUser(user);
+
+        when(taskRepository.findById(1))
+                .thenReturn(Optional.of(task));
+
+        // Act + Assert
+        assertThrows(
+                AccessDeniedException.class,
+                () -> taskService.deleteTask(1, "testUser")
+        );
+
+        verify(taskRepository).findById(1);
+        verify(taskRepository, never()).deleteById(1);
+    }
+
+    @Test
+    void deleteTask_throwsTaskCompleted() {
+        // Arrange
+        User user = new User();
+        user.setUsername("testUser");
+
+        Task task = new Task();
+        task.setId(1);
+        task.setTitle("Completed task");
+        task.setCompleted(true);
+        task.setUser(user);
+
+        when(taskRepository.findById(1))
+                .thenReturn(Optional.of(task));
+
+        // Act + Assert
+        assertThrows(
+                TaskCompleted.class,
+                () -> taskService.deleteTask(1, "testUser")
+        );
+
+        verify(taskRepository).findById(1);
+        verify(taskRepository, never()).deleteById(1);
+    }
 }

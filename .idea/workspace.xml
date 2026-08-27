@@ -72,6 +72,10 @@
     "JUnit.TaskServiceTest.createTask_createsTask.executor": "Run",
     "JUnit.TaskServiceTest.createTask_defaultsCompletedToFalse.executor": "Run",
     "JUnit.TaskServiceTest.createTask_returnsTask.executor": "Run",
+    "JUnit.TaskServiceTest.deleteTask_deletesTask.executor": "Run",
+    "JUnit.TaskServiceTest.deleteTask_throwsAccessDenied.executor": "Run",
+    "JUnit.TaskServiceTest.deleteTask_throwsTaskCompleted.executor": "Run",
+    "JUnit.TaskServiceTest.deleteTask_throwsTaskNotFound.executor": "Run",
     "JUnit.TaskServiceTest.executor": "Run",
     "JUnit.TaskServiceTest.getAllTasks_returnsEmptyList.executor": "Run",
     "JUnit.TaskServiceTest.getAllTasks_returnsTasksForUser.executor": "Run",
@@ -135,8 +139,8 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TaskServiceTest.updateTask_throwsAccessDenied">
-    <configuration name="TaskServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.TaskServiceTest.deleteTask_deletesTask">
+    <configuration name="TaskServiceTest.deleteTask_deletesTask" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learning-spring" />
       <extension name="coverage">
         <pattern>
@@ -146,12 +150,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
       <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="deleteTask_deletesTask" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TaskServiceTest.createTask_defaultsCompletedToFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TaskServiceTest.deleteTask_throwsAccessDenied" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learning-spring" />
       <extension name="coverage">
         <pattern>
@@ -161,7 +166,39 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
       <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
-      <option name="METHOD_NAME" value="createTask_defaultsCompletedToFalse" />
+      <option name="METHOD_NAME" value="deleteTask_throwsAccessDenied" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskServiceTest.deleteTask_throwsTaskCompleted" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="learning-spring" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.popam.learning_spring.project_web.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
+      <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
+      <option name="METHOD_NAME" value="deleteTask_throwsTaskCompleted" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskServiceTest.deleteTask_throwsTaskNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="learning-spring" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.popam.learning_spring.project_web.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
+      <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
+      <option name="METHOD_NAME" value="deleteTask_throwsTaskNotFound" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -183,38 +220,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TaskServiceTest.updateTask_throwsTaskNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="learning-spring" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.popam.learning_spring.project_web.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
-      <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
-      <option name="METHOD_NAME" value="updateTask_throwsTaskNotFound" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TaskServiceTest.updateTask_updatesTask" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="learning-spring" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.popam.learning_spring.project_web.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
-      <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
-      <option name="METHOD_NAME" value="updateTask_updatesTask" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/frontend/task-manager-frontend/package.json" />
       <command value="run" />
@@ -226,20 +231,20 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="JUnit.TaskServiceTest.deleteTask_deletesTask" />
+      <item itemvalue="JUnit.TaskServiceTest.deleteTask_throwsAccessDenied" />
+      <item itemvalue="JUnit.TaskServiceTest.deleteTask_throwsTaskCompleted" />
+      <item itemvalue="JUnit.TaskServiceTest.deleteTask_throwsTaskNotFound" />
       <item itemvalue="JUnit.TaskServiceTest.updateTask_throwsAccessDenied" />
-      <item itemvalue="JUnit.TaskServiceTest.updateTask_throwsTaskNotFound" />
-      <item itemvalue="JUnit.TaskServiceTest.updateTask_updatesTask" />
-      <item itemvalue="JUnit.TaskServiceTest" />
-      <item itemvalue="JUnit.TaskServiceTest.createTask_defaultsCompletedToFalse" />
       <item itemvalue="npm.dev" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TaskServiceTest.deleteTask_deletesTask" />
+        <item itemvalue="JUnit.TaskServiceTest.deleteTask_throwsTaskNotFound" />
+        <item itemvalue="JUnit.TaskServiceTest.deleteTask_throwsAccessDenied" />
+        <item itemvalue="JUnit.TaskServiceTest.deleteTask_throwsTaskCompleted" />
         <item itemvalue="JUnit.TaskServiceTest.updateTask_throwsAccessDenied" />
-        <item itemvalue="JUnit.TaskServiceTest.updateTask_throwsTaskNotFound" />
-        <item itemvalue="JUnit.TaskServiceTest.updateTask_updatesTask" />
-        <item itemvalue="JUnit.TaskServiceTest.createTask_defaultsCompletedToFalse" />
-        <item itemvalue="JUnit.TaskServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -277,7 +282,7 @@
       <workItem from="1787317782383" duration="3288000" />
       <workItem from="1787387851614" duration="152000" />
       <workItem from="1787757309800" duration="5974000" />
-      <workItem from="1787839728558" duration="1672000" />
+      <workItem from="1787839728558" duration="2461000" />
     </task>
     <servers />
   </component>
