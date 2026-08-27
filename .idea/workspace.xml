@@ -14,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="72" />
+    <option name="cachedIndexableFilesCount" value="73" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -79,6 +79,7 @@
     "JUnit.TaskServiceTest.getTaskById_returnsTask.executor": "Run",
     "JUnit.TaskServiceTest.getTaskById_throwsAccessDenied_whenTaskBelongsToAnotherUser.executor": "Run",
     "JUnit.TaskServiceTest.getTaskById_throwsTaskNotFound.executor": "Run",
+    "JUnit.TaskServiceTest.updateTask_updatesTask.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Node.js.App.jsx.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
@@ -132,7 +133,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TaskServiceTest.createTask_defaultsCompletedToFalse">
+  <component name="RunManager" selected="JUnit.TaskServiceTest.updateTask_throwsAccessDenied">
     <configuration name="TaskServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learning-spring" />
       <extension name="coverage">
@@ -144,22 +145,6 @@
       <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
       <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TaskServiceTest.createTask_createsTask" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="learning-spring" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.popam.learning_spring.project_web.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
-      <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
-      <option name="METHOD_NAME" value="createTask_createsTask" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -180,7 +165,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TaskServiceTest.getAllTasks_returnsEmptyList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TaskServiceTest.updateTask_throwsAccessDenied" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learning-spring" />
       <extension name="coverage">
         <pattern>
@@ -190,13 +175,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
       <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
-      <option name="METHOD_NAME" value="getAllTasks_returnsEmptyList" />
+      <option name="METHOD_NAME" value="updateTask_throwsAccessDenied" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TaskServiceTest.getAllTasks_returnsTasksForUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TaskServiceTest.updateTask_throwsTaskNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learning-spring" />
       <extension name="coverage">
         <pattern>
@@ -206,7 +191,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
       <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
-      <option name="METHOD_NAME" value="getAllTasks_returnsTasksForUser" />
+      <option name="METHOD_NAME" value="updateTask_throwsTaskNotFound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskServiceTest.updateTask_updatesTask" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="learning-spring" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.popam.learning_spring.project_web.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
+      <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
+      <option name="METHOD_NAME" value="updateTask_updatesTask" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -223,20 +224,20 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="JUnit.TaskServiceTest.updateTask_throwsAccessDenied" />
+      <item itemvalue="JUnit.TaskServiceTest.updateTask_throwsTaskNotFound" />
+      <item itemvalue="JUnit.TaskServiceTest.updateTask_updatesTask" />
       <item itemvalue="JUnit.TaskServiceTest" />
-      <item itemvalue="JUnit.TaskServiceTest.createTask_createsTask" />
       <item itemvalue="JUnit.TaskServiceTest.createTask_defaultsCompletedToFalse" />
-      <item itemvalue="JUnit.TaskServiceTest.getAllTasks_returnsEmptyList" />
-      <item itemvalue="JUnit.TaskServiceTest.getAllTasks_returnsTasksForUser" />
       <item itemvalue="npm.dev" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TaskServiceTest.updateTask_throwsAccessDenied" />
+        <item itemvalue="JUnit.TaskServiceTest.updateTask_throwsTaskNotFound" />
+        <item itemvalue="JUnit.TaskServiceTest.updateTask_updatesTask" />
         <item itemvalue="JUnit.TaskServiceTest.createTask_defaultsCompletedToFalse" />
         <item itemvalue="JUnit.TaskServiceTest" />
-        <item itemvalue="JUnit.TaskServiceTest.createTask_createsTask" />
-        <item itemvalue="JUnit.TaskServiceTest.getAllTasks_returnsEmptyList" />
-        <item itemvalue="JUnit.TaskServiceTest.getAllTasks_returnsTasksForUser" />
       </list>
     </recent_temporary>
   </component>
@@ -273,7 +274,8 @@
       <workItem from="1787302861256" duration="11938000" />
       <workItem from="1787317782383" duration="3288000" />
       <workItem from="1787387851614" duration="152000" />
-      <workItem from="1787757309800" duration="5878000" />
+      <workItem from="1787757309800" duration="5974000" />
+      <workItem from="1787839728558" duration="735000" />
     </task>
     <servers />
   </component>

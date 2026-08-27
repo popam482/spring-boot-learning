@@ -12,8 +12,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TaskServiceTest {
@@ -231,5 +230,87 @@ public class TaskServiceTest {
 
         // Assert
         assertFalse(result.getCompleted());
+    }
+
+    @Test
+    void updateTask_updatesTask() {
+        // Arrange
+        User user = new User();
+        user.setUsername("testUser");
+
+        Task existingTask = new Task();
+        existingTask.setId(1);
+        existingTask.setTitle("Old title");
+        existingTask.setDescription("Old description");
+        existingTask.setCompleted(false);
+        existingTask.setUser(user);
+
+        TaskRequestDTO request = new TaskRequestDTO();
+        request.setTitle("New title");
+        request.setDescription("New description");
+        request.setCompleted(true);
+
+        when(taskRepository.findById(1))
+                .thenReturn(Optional.of(existingTask));
+
+        when(taskRepository.save(any(Task.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Act
+        TaskResponseDTO result =
+                taskService.updateTask(1, request, "testUser");
+
+        // Assert
+        assertEquals("New title", result.getTitle());
+        assertEquals("New description", result.getDescription());
+        assertTrue(result.getCompleted());
+
+        verify(taskRepository).findById(1);
+        verify(taskRepository).save(existingTask);
+    }
+
+    @Test
+    void updateTask_throwsTaskNotFound() {
+        // Arrange
+        when(taskRepository.findById(1))
+                .thenReturn(Optional.empty());
+
+        TaskRequestDTO request = new TaskRequestDTO();
+
+        // Act + Assert
+        assertThrows(
+                TaskNotFound.class,
+                () -> taskService.updateTask(1, request, "testUser")
+        );
+
+        verify(taskRepository).findById(1);
+        verify(taskRepository, never()).save(any(Task.class));
+    }
+
+    @Test
+    void updateTask_throwsAccessDenied() {
+        // Arrange
+        User user = new User();
+        user.setUsername("anotherTestUser");
+
+        Task task = new Task();
+        task.setId(1);
+        task.setTitle("Test task");
+        task.setUser(user);
+
+        TaskRequestDTO request = new TaskRequestDTO();
+        request.setTitle("New title");
+
+        when(taskRepository.findById(1))
+                .thenReturn(Optional.of(task));
+
+        // Act + Assert
+        assertThrows(
+                AccessDeniedException.class,
+                () -> taskService.updateTask(1, request, "testUser")
+        );
+
+        verify(taskRepository).findById(1);
+        verify(taskRepository, never()).save(any(Task.class));
     }
 }
