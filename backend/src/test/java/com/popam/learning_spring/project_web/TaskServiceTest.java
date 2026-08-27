@@ -516,4 +516,44 @@ public class TaskServiceTest {
         verify(taskRepository).findById(1);
         verify(taskRepository, never()).deleteById(1);
     }
+
+    @Test
+    void searchByCompleted_returnsMatchingTasks() {
+        // Arrange
+        User user = new User();
+        user.setUsername("testUser");
+
+        Task task1 = new Task();
+        task1.setId(1);
+        task1.setTitle("Completed task");
+        task1.setCompleted(true);
+        task1.setUser(user);
+
+        Task task2 = new Task();
+        task2.setId(2);
+        task2.setTitle("Another completed task");
+        task2.setCompleted(true);
+        task2.setUser(user);
+
+        when(taskRepository.findTasksByCompletedAndUserUsername(
+                true,
+                "testUser"
+        )).thenReturn(List.of(task1, task2));
+
+        // Act
+        List<TaskResponseDTO> result =
+                taskService.searchByCompleted(true, "testUser");
+
+        // Assert
+        assertEquals(2, result.size());
+
+        assertEquals("Completed task", result.get(0).getTitle());
+        assertEquals("Another completed task", result.get(1).getTitle());
+
+        assertTrue(result.get(0).getCompleted());
+        assertTrue(result.get(1).getCompleted());
+
+        verify(taskRepository)
+                .findTasksByCompletedAndUserUsername(true, "testUser");
+    }
 }

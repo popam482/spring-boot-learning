@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3c86226-8cf8-42e1-b447-4476f05d2b40" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/popam/learning_spring/project_web/TaskServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/popam/learning_spring/project_web/TaskServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,6 +82,7 @@
     "JUnit.TaskServiceTest.getTaskById_returnsTask.executor": "Run",
     "JUnit.TaskServiceTest.getTaskById_throwsAccessDenied_whenTaskBelongsToAnotherUser.executor": "Run",
     "JUnit.TaskServiceTest.getTaskById_throwsTaskNotFound.executor": "Run",
+    "JUnit.TaskServiceTest.searchByCompleted_returnsMatchingTasks.executor": "Run",
     "JUnit.TaskServiceTest.updateTask_throwsAccessDenied.executor": "Run",
     "JUnit.TaskServiceTest.updateTask_throwsTaskNotFound.executor": "Debug",
     "JUnit.TaskServiceTest.updateTask_updatesTask.executor": "Run",
@@ -139,7 +139,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TaskServiceTest.deleteTask_deletesTask">
+  <component name="RunManager" selected="JUnit.TaskServiceTest.searchByCompleted_returnsMatchingTasks">
     <configuration name="TaskServiceTest.deleteTask_deletesTask" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learning-spring" />
       <extension name="coverage">
@@ -204,7 +204,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TaskServiceTest.updateTask_throwsAccessDenied" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TaskServiceTest.searchByCompleted_returnsMatchingTasks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="learning-spring" />
       <extension name="coverage">
         <pattern>
@@ -214,7 +214,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.popam.learning_spring.project_web" />
       <option name="MAIN_CLASS_NAME" value="com.popam.learning_spring.project_web.TaskServiceTest" />
-      <option name="METHOD_NAME" value="updateTask_throwsAccessDenied" />
+      <option name="METHOD_NAME" value="searchByCompleted_returnsMatchingTasks" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -235,16 +235,16 @@
       <item itemvalue="JUnit.TaskServiceTest.deleteTask_throwsAccessDenied" />
       <item itemvalue="JUnit.TaskServiceTest.deleteTask_throwsTaskCompleted" />
       <item itemvalue="JUnit.TaskServiceTest.deleteTask_throwsTaskNotFound" />
-      <item itemvalue="JUnit.TaskServiceTest.updateTask_throwsAccessDenied" />
+      <item itemvalue="JUnit.TaskServiceTest.searchByCompleted_returnsMatchingTasks" />
       <item itemvalue="npm.dev" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TaskServiceTest.searchByCompleted_returnsMatchingTasks" />
         <item itemvalue="JUnit.TaskServiceTest.deleteTask_deletesTask" />
         <item itemvalue="JUnit.TaskServiceTest.deleteTask_throwsTaskNotFound" />
         <item itemvalue="JUnit.TaskServiceTest.deleteTask_throwsAccessDenied" />
         <item itemvalue="JUnit.TaskServiceTest.deleteTask_throwsTaskCompleted" />
-        <item itemvalue="JUnit.TaskServiceTest.updateTask_throwsAccessDenied" />
       </list>
     </recent_temporary>
   </component>
@@ -282,7 +282,7 @@
       <workItem from="1787317782383" duration="3288000" />
       <workItem from="1787387851614" duration="152000" />
       <workItem from="1787757309800" duration="5974000" />
-      <workItem from="1787839728558" duration="2461000" />
+      <workItem from="1787839728558" duration="3949000" />
     </task>
     <servers />
   </component>
