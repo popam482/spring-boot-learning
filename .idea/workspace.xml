@@ -79,6 +79,8 @@
     "JUnit.TaskServiceTest.getTaskById_returnsTask.executor": "Run",
     "JUnit.TaskServiceTest.getTaskById_throwsAccessDenied_whenTaskBelongsToAnotherUser.executor": "Run",
     "JUnit.TaskServiceTest.getTaskById_throwsTaskNotFound.executor": "Run",
+    "JUnit.TaskServiceTest.updateTask_throwsAccessDenied.executor": "Run",
+    "JUnit.TaskServiceTest.updateTask_throwsTaskNotFound.executor": "Debug",
     "JUnit.TaskServiceTest.updateTask_updatesTask.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Node.js.App.jsx.executor": "Run",
@@ -275,7 +277,7 @@
       <workItem from="1787317782383" duration="3288000" />
       <workItem from="1787387851614" duration="152000" />
       <workItem from="1787757309800" duration="5974000" />
-      <workItem from="1787839728558" duration="735000" />
+      <workItem from="1787839728558" duration="1672000" />
     </task>
     <servers />
   </component>

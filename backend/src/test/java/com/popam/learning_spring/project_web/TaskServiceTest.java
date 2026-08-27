@@ -313,4 +313,118 @@ public class TaskServiceTest {
         verify(taskRepository).findById(1);
         verify(taskRepository, never()).save(any(Task.class));
     }
+
+    @Test
+    void patchTask_updatesProvidedFields() {
+        // Arrange
+        User user = new User();
+        user.setUsername("testUser");
+
+        Task existingTask = new Task();
+        existingTask.setId(1);
+        existingTask.setTitle("Old title");
+        existingTask.setDescription("Old description");
+        existingTask.setCompleted(false);
+        existingTask.setUser(user);
+
+        TaskRequestDTO request = new TaskRequestDTO();
+        request.setTitle("New title");
+        request.setCompleted(true);
+
+        when(taskRepository.findById(1))
+                .thenReturn(Optional.of(existingTask));
+
+        when(taskRepository.save(any(Task.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Act
+        TaskResponseDTO result =
+                taskService.patchTask(1, request, "testUser");
+
+        // Assert
+        assertEquals("New title", result.getTitle());
+        assertEquals("Old description", result.getDescription());
+        assertTrue(result.getCompleted());
+
+        verify(taskRepository).save(existingTask);
+    }
+
+    @Test
+    void patchTask_preservesNullFields() {
+        // Arrange
+        User user = new User();
+        user.setUsername("testUser");
+
+        Task existingTask = new Task();
+        existingTask.setId(1);
+        existingTask.setTitle("Old title");
+        existingTask.setDescription("Old description");
+        existingTask.setCompleted(false);
+        existingTask.setUser(user);
+
+        TaskRequestDTO request = new TaskRequestDTO();
+        request.setTitle(null);
+        request.setDescription(null);
+        request.setCompleted(null);
+
+        when(taskRepository.findById(1))
+                .thenReturn(Optional.of(existingTask));
+
+        when(taskRepository.save(any(Task.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Act
+        TaskResponseDTO result =
+                taskService.patchTask(1, request, "testUser");
+
+        // Assert
+        assertEquals("Old title", result.getTitle());
+        assertEquals("Old description", result.getDescription());
+        assertFalse(result.getCompleted());
+    }
+
+    @Test
+    void patchTask_throwsTaskNotFound() {
+        // Arrange
+        when(taskRepository.findById(1))
+                .thenReturn(Optional.empty());
+
+        TaskRequestDTO request = new TaskRequestDTO();
+
+        // Act + Assert
+        assertThrows(
+                TaskNotFound.class,
+                () -> taskService.patchTask(1, request, "testUser")
+        );
+
+        verify(taskRepository).findById(1);
+        verify(taskRepository, never()).save(any(Task.class));
+    }
+
+    @Test
+    void patchTask_throwsAccessDenied() {
+        // Arrange
+        User user = new User();
+        user.setUsername("anotherTestUser");
+
+        Task task = new Task();
+        task.setId(1);
+        task.setTitle("Test task");
+        task.setUser(user);
+
+        TaskRequestDTO request = new TaskRequestDTO();
+        request.setTitle("New title");
+
+        when(taskRepository.findById(1))
+                .thenReturn(Optional.of(task));
+
+        // Act + Assert
+        assertThrows(
+                AccessDeniedException.class,
+                () -> taskService.patchTask(1, request, "testUser")
+        );
+
+        verify(taskRepository).findById(1);
+        verify(taskRepository, never()).save(any(Task.class));
+    }
 }
